@@ -208,13 +208,13 @@ public class Login extends AppCompatActivity {
                             String respuesta = respuestaJSON.getString("respuesta");
                             String fecha_registro = respuestaJSON.getString("fecha_registro");
 
-                        }
+                            Toast.makeText(Login.this, "¡Bienvenido " + nombre + "!", Toast.LENGTH_SHORT).show();
 
+                        }
 
                         Intent intent = new Intent(Login.this, MainActivity.class);
                         startActivity(intent);
-
-                        Toast.makeText(Login.this, s.toString(), Toast.LENGTH_SHORT).show();
+                        finish();
 
                     } catch (JSONException e) {
                         e.printStackTrace();

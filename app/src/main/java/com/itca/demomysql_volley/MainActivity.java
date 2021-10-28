@@ -1,12 +1,17 @@
 package com.itca.demomysql_volley;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -61,5 +66,39 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int id = item.getItemId();
+
+        if(id == R.id.logout){
+
+            AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+            alert.setIcon(android.R.drawable.ic_dialog_alert);
+            alert.setTitle("Cerrar sesión");
+            alert.setMessage("¿Desea cerrar sesión?");
+            alert.setCancelable(false);
+            alert.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intent = new Intent(MainActivity.this, Login.class);
+                    startActivity(intent);
+                    finishAffinity();
+                }
+            });
+
+            alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            }).show();
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
